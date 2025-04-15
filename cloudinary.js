@@ -11,14 +11,19 @@ cloudinary.config({
 });
 
 // Carica l'immagine nella cartella 'prova'
+// src/utils/cloudinary.js
+
 const uploadImage = async (filePath) => {
   try {
+    console.log(`Caricamento dell'immagine da: ${filePath}`); // Log per verificare il percorso
     const result = await cloudinary.uploader.upload(filePath, {
-      folder: 'prova', // 👈 qui specifichiamo la cartella
+      folder: 'prova', // Cartella su Cloudinary
     });
+
+    console.log('Immagine caricata con successo! URL:', result.secure_url); // Log dell'URL restituito da Cloudinary
     return result.secure_url;
   } catch (err) {
-    console.error('Errore durante l\'upload su Cloudinary:', err);
+    console.error('Errore durante l\'upload su Cloudinary:', err); // Log di errore
     throw err;
   }
 };
